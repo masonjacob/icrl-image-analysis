@@ -1,5 +1,4 @@
-# Docker Compose React, Nodejs and MySQL example
-
+# URI Intelligent Control and Robotica Laboratory (ICRL): Dockerized Full Stack Image Notation Application
 ## Run the System
 We can easily run the whole with only a single command:
 ```bash
