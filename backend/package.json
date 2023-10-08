@@ -4,6 +4,8 @@
   "description": "Node.js Rest Apis with Express, Sequelize & MySQL",
   "main": "server.js",
   "scripts": {
+    "dev": "npx nodemon --watch app server.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -16,6 +18,11 @@
   ],
   "author": "masonjacob",
   "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^4.1.1",
+    "nodemon": "1.19.1",
+    "typescript": "^3.7.3"
+  },
   "dependencies": {
     "dotenv": "^10.0.0",
     "cors": "^2.8.5",

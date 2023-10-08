@@ -4,4 +4,7 @@ WORKDIR /backend
 COPY package.json .
 RUN npm install
 COPY . .
-CMD npm start
+# Dev Command: For live reload
+CMD npm run dev
+# Prod Command:
+# CMD npm run start

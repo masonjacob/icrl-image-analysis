@@ -11,7 +11,8 @@ services:
     ports:
       - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
     volumes:
-      - .backend/db/icrl_image_analysis.sql:/docker-entrypoint-initdb.d/icrl_image_analysis.sql
+      - db:/var/lib/mysql
+    # - ./backend/db/icrl_image_analysis.sql:/docker-entrypoint-initdb.d/icrl_image_analysis.sql
     networks:
       - backend
 
@@ -37,6 +38,9 @@ services:
     env_file: ./.env
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+    volumes:
+      - ./backend:/backend
+      - /backend/node_modules
     environment:
       - DB_HOST=mysqldb
       - DB_USER=$MYSQLDB_USER
@@ -57,6 +61,9 @@ services:
         - REACT_APP_API_BASE_URL=$CLIENT_API_BASE_URL
     ports:
       - $REACT_LOCAL_PORT:$REACT_DOCKER_PORT
+    volumes:
+      - ./frontend:/frontend
+      - /frontend/node_modules
     networks:
       - frontend  
 
