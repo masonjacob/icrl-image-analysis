@@ -64,6 +64,8 @@ services:
     volumes:
       - ./frontend:/frontend
       - /frontend/node_modules
+    environment:
+      - WATCHPACK_POLLING=true
     networks:
       - frontend  
 

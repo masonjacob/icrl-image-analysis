@@ -99,7 +99,7 @@ export default class TutorialsList extends Component {
             <input
               type="text"
               className="form-control"
-              placeholder="Search by title"
+              placeholder="Type to search"
               value={searchTitle}
               onChange={this.onChangeSearchTitle}
             />

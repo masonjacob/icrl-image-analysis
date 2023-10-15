@@ -12,6 +12,8 @@ ENV REACT_APP_API_BASE_URL=$REACT_APP_API_BASE_URL
 # Dev Command: For live reload
 CMD npm run start
 
+EXPOSE $REACT_DOCKER_PORT
+
 # Prod Command
 #RUN npm run build
 
