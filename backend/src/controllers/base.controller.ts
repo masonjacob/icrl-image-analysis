@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'; // Assuming you're using Express.js
 import { Model, Op } from 'sequelize';
 import { ModelStatic, WhereOptions } from 'sequelize/types';
+import db from '../models/index';
 
 // Define the controller for two models
 interface BaseController {
@@ -137,5 +138,29 @@ export const deleteRecord = ({ model }: BaseController) => async (
       return res.status(500).json({ message: error.message || `Could not delete record with id ${id}` });
     }
     return res.status(500).json({ message: `Could not delete record with id ${id}` });
+  }
+};
+
+// Controller function to list database and table information
+export const listDatabaseInfo = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    // Get the database name from the Sequelize instance
+    const databaseName = db.sequelize.getDatabaseName();
+
+    // Get table names from the Sequelize instance
+    const tableNames = await db.sequelize.getQueryInterface().showAllTables();
+
+    // Create an object with database and table information
+    const databaseInfo = {
+      database: databaseName,
+      tables: tableNames,
+    };
+
+    res.status(200).json(databaseInfo);
+  } catch (error) {
+    res.status(500).json({ message: 'Error retrieving database information' });
   }
 };

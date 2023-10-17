@@ -1,5 +1,5 @@
 import express, { Router } from 'express'; // Import 'express' and the 'Router' type
-import { createRecord, findAllRecords, findRecordById, updateRecord, deleteRecord } from '../controllers/base.controller';
+import { createRecord, findAllRecords, findRecordById, updateRecord, deleteRecord, listDatabaseInfo } from '../controllers/base.controller';
 import db from '../models'; // Import your Sequelize models
 
 const router: Router = express.Router(); // Create a router instance
@@ -21,5 +21,7 @@ router.get('/images', findAllRecords({ model: ImageModel }));
 router.get('/images/:id', findRecordById({ model: ImageModel }));
 router.put('/images/:id', updateRecord({ model: ImageModel }));
 router.delete('/images/:id', deleteRecord({ model: ImageModel }));
+
+router.get('/database-info', listDatabaseInfo);
 
 export default router; // Export the router
