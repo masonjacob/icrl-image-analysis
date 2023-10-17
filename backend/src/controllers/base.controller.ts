@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'; // Assuming you're using Express.js
-import { Model, Op} from 'sequelize';
+import { Model, Op } from 'sequelize';
 import { ModelStatic, WhereOptions } from 'sequelize/types';
 
 // Define the controller for two models
@@ -28,9 +28,14 @@ export const createRecord = ({ model }: BaseController) => async (
     // Save the record in the database
     const createdRecord = await model.create(newRecord);
     return res.status(201).json(createdRecord);
-  } catch (error) {
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return res.status(500).json({
+        message: error.message || 'Some error occurred while creating the record.',
+      });
+    }
     return res.status(500).json({
-      message: error.message || 'Some error occurred while creating the record.',
+      message: 'Some error occurred while creating the record.',
     });
   }
 };
@@ -40,17 +45,22 @@ export const findAllRecords = ({ model }: BaseController) => async (
   req: Request,
   res: Response
 ) => {
-  const title = req.query.title as string | undefined;
-  const condition: WhereOptions = title
-  ? { title: { [Op.like]: `%${title}%` } }
-  : {};
-
   try {
+    const title = req.query.title as string | undefined;
+    const condition: WhereOptions = title
+      ? { title: { [Op.like]: `%${title}%` } }
+      : {};
+
     const records = await model.findAll({ where: condition });
     return res.status(200).json(records);
-  } catch (error) {
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return res.status(500).json({
+        message: error.message || 'Some error occurred while retrieving records.',
+      });
+    }
     return res.status(500).json({
-      message: error.message || 'Some error occurred while retrieving records.',
+      message: 'Some error occurred while retrieving records.',
     });
   }
 };
@@ -69,7 +79,10 @@ export const findRecordById = ({ model }: BaseController) => async (
     } else {
       return res.status(404).json({ message: `Record with id ${id} not found.` });
     }
-  } catch (error) {
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return res.status(500).json({ message: error.message || `Error retrieving record with id ${id}` });
+    }
     return res.status(500).json({ message: `Error retrieving record with id ${id}` });
   }
 };
@@ -94,7 +107,10 @@ export const updateRecord = ({ model }: BaseController) => async (
         message: `Cannot update record with id ${id}. Maybe the record was not found or req.body is empty!`,
       });
     }
-  } catch (error) {
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return res.status(500).json({ message: error.message || `Error updating record with id ${id}` });
+    }
     return res.status(500).json({ message: `Error updating record with id ${id}` });
   }
 };
@@ -116,7 +132,10 @@ export const deleteRecord = ({ model }: BaseController) => async (
     } else {
       return res.status(404).json({ message: `Cannot delete record with id ${id}. Maybe the record was not found!` });
     }
-  } catch (error) {
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return res.status(500).json({ message: error.message || `Could not delete record with id ${id}` });
+    }
     return res.status(500).json({ message: `Could not delete record with id ${id}` });
   }
 };
