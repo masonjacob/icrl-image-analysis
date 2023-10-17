@@ -1,6 +1,5 @@
-// models/ImageAnnotation.ts
-
-import { DataTypes, Model, Sequelize } from 'sequelize';
+import { DataTypes, Sequelize } from 'sequelize';
+import { defineImageModel } from './image.model'; // Import the Image model
 
 export const defineImageAnnotationModel = (sequelize: Sequelize) => {
   const ImageAnnotation = sequelize.define('image_annotations', {
@@ -24,7 +23,7 @@ export const defineImageAnnotationModel = (sequelize: Sequelize) => {
   });
 
   // Define associations
-  ImageAnnotation.belongsTo(Image, { foreignKey: 'image_id' });
+  ImageAnnotation.belongsTo(defineImageModel(sequelize), { foreignKey: 'image_id' });
 
   return ImageAnnotation;
 };

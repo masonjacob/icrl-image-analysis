@@ -1,10 +1,10 @@
 import { Request, Response } from 'express'; // Assuming you're using Express.js
-import { Model, Op, Sequelize } from 'sequelize';
-import { ModelCtor } from 'sequelize/types';
+import { Model, Op} from 'sequelize';
+import { ModelStatic, WhereOptions } from 'sequelize/types';
 
 // Define the controller for two models
 interface BaseController {
-  model: ModelCtor<Model>;
+  model: ModelStatic<Model>;
 }
 
 // Create and Save a new record
@@ -41,7 +41,9 @@ export const findAllRecords = ({ model }: BaseController) => async (
   res: Response
 ) => {
   const title = req.query.title as string | undefined;
-  const condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+  const condition: WhereOptions = title
+  ? { title: { [Op.like]: `%${title}%` } }
+  : {};
 
   try {
     const records = await model.findAll({ where: condition });

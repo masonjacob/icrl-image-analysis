@@ -1,11 +1,11 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
+import "dotenv/config";
+import express, { Application } from "express";
+import cors from "cors";
 
-const app = express();
+const app : Application = express();
 
-var corsOptions = {
-  origin: process.env.CLIENT_ORIGIN || "http://localhost:8888"
+const corsOptions = {
+  origin: process.env.CLIENT_ORIGIN || "http://localhost:8888",
 };
 
 app.use(cors(corsOptions));
@@ -16,7 +16,7 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-const db = require("./app/models");
+import db from "./models";
 
 db.sequelize.sync();
 // // drop the table if it already exists
@@ -29,7 +29,9 @@ app.get("/", (req, res) => {
   res.json({ message: "Node.js Server Running." });
 });
 
-require("./app/routes/tutorial.routes")(app);
+import routes from "./routes/routes";
+
+app.use("/api", routes);
 
 // set port, listen for requests
 const PORT = process.env.NODE_DOCKER_PORT || 8080;

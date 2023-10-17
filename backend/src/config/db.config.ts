@@ -1,4 +1,3 @@
-
 type Dialect = 'mysql' | 'sqlite' | 'postgres' | 'mssql';
 
 const dbConfig = {

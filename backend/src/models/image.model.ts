@@ -1,7 +1,7 @@
 // models/Image.ts
-import { DataTypes, Model, Sequelize } from 'sequelize';
+import { DataTypes, Sequelize } from 'sequelize';
 
-export const defineImageModel = (sequelize: Sequelize) => {
+const defineImageModel = (sequelize: Sequelize) => {
   const Image = sequelize.define('images', {
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
@@ -16,3 +16,5 @@ export const defineImageModel = (sequelize: Sequelize) => {
 
   return Image;
 };
+
+export { defineImageModel };
