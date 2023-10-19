@@ -12,7 +12,6 @@ const serverApiEndpoint = '/api'; // Your API endpoint
 const reactAppBaseUrl = window.location.origin.replace(/:\d+$/, ''); // gets the absolute URL of the react app and cuts off the port
 const serverUrl = `${reactAppBaseUrl}:${serverPort}${serverApiEndpoint}`;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
 const App: React.FC = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [uploadedImage, setUploadedImage] = useState<{ image: Blob | MediaSource } | null>(null); // To store the uploaded image for displaying it
