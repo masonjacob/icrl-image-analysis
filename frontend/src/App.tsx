@@ -32,6 +32,10 @@ const App: React.FC = () => {
       const response = await fetch(serverUrl + "/images", {
         method: 'POST',
         body: formData,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'multipart/form-data'
+        }
       });
 
       if (response.ok) {

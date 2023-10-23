@@ -13,6 +13,7 @@ export const createRecord = ({ model }: BaseController) => async (
   req: Request,
   res: Response
 ) => {
+  console.log(req.body);
   try {
     // Validate request
     if (!req.body.title) {
