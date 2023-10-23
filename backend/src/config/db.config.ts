@@ -1,4 +1,4 @@
-type Dialect = 'mysql' | 'sqlite' | 'postgres' | 'mssql';
+import {Dialect} from 'sequelize';
 
 const dbConfig = {
   HOST: process.env.DB_HOST || 'localhost',

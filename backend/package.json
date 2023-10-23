@@ -4,7 +4,7 @@
   "description": "Node.js Rest Apis with Express, Sequelize & MySQL",
   "main": "index.ts",
   "scripts": {
-    "start:dev": "npx nodemon",
+    "start:dev": "npx nodemon -L",
     "build": "rimraf ./build && tsc",
     "start": "npm run build && node build/index.js"
   },
