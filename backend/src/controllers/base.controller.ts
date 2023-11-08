@@ -20,15 +20,12 @@ export const createRecord = ({ model }: BaseController) => async (
       return res.status(400).json({ message: 'Content can not be empty!' });
     }
 
-    // Create a record
-    const newRecord = {
-      title: req.body.title,
-      description: req.body.description,
-      published: req.body.published || false,
-    };
+    // Create a new instance of YourModel and populate it with req.body
+    const newRecord = model.build(req.body);
 
     // Save the record in the database
-    const createdRecord = await model.create(newRecord);
+    const createdRecord = await newRecord.save();
+    
     return res.status(201).json(createdRecord);
   } catch (error: unknown) {
     if (error instanceof Error) {

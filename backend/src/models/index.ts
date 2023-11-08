@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize';
 import dbConfig from '../config/db.config'; // Import your database configuration
 import { defineImageModel } from './image.model';
-import { defineImageAnnotationModel } from './image_annotations.model';
+import { defineImageAnnotationModel } from './image_annotation.model';
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,

@@ -16,6 +16,9 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
+// setup multer
+// Set up your Multer instance with the existing configuration
+
 import db from "./models";
 
 db.sequelize.sync();
