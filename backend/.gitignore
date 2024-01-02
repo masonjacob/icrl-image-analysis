@@ -17,6 +17,8 @@
 .env.development.local
 .env.test.local
 .env.production.local
+credentials.json
+icrl-image-analysis-backend-service-account-private-key.json
 
 npm-debug.log*
 yarn-debug.log*

@@ -32,7 +32,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
   };
 
   return (
-    <div>
+    <div className="grid place-items-center">
       <h2>Add Image</h2>
       <form onSubmit={handleFormSubmit}>
         <div>

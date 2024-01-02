@@ -1,4 +1,4 @@
-import express, { Router, Request, Response } from 'express';
+import express, { Router} from 'express';
 import { createRecord, findAllRecords, findRecordById, updateRecord, deleteRecord, listDatabaseInfo } from '../controllers/base.controller';
 import db from '../models'; // Import your Sequelize models
 import upload from "./../config/multer.config";

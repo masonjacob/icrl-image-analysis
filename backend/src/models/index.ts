@@ -2,6 +2,7 @@ import { Sequelize } from 'sequelize';
 import dbConfig from '../config/db.config'; // Import your database configuration
 import { defineImageModel } from './image.model';
 import { defineImageAnnotationModel } from './image_annotation.model';
+import { defineMissionModel } from './mission.model';
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
@@ -18,6 +19,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 const db = {
   Sequelize,
   sequelize,
+  mission: defineMissionModel(sequelize),
   image: defineImageModel(sequelize),
   image_annotations: defineImageAnnotationModel(sequelize),
 };

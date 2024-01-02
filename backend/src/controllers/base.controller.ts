@@ -13,12 +13,14 @@ export const createRecord = ({ model }: BaseController) => async (
   req: Request,
   res: Response
 ) => {
+  //const files = req.files; if(Array.isArray(files)) { throw new Error(); } else { console.log(files.image) }
   console.log(req.body);
+  console.log(req.file)
   try {
     // Validate request
-    if (!req.body.title) {
+    if (!req.body.title) 
       return res.status(400).json({ message: 'Content can not be empty!' });
-    }
+    
 
     // Create a new instance of YourModel and populate it with req.body
     const newRecord = model.build(req.body);
@@ -29,6 +31,7 @@ export const createRecord = ({ model }: BaseController) => async (
     return res.status(201).json(createdRecord);
   } catch (error: unknown) {
     if (error instanceof Error) {
+      console.log("TEST ERROR: " + error.message);
       return res.status(500).json({
         message: error.message || 'Some error occurred while creating the record.',
       });

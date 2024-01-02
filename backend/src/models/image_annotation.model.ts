@@ -1,5 +1,4 @@
 import { DataTypes, Sequelize } from 'sequelize';
-import { defineImageModel } from './image.model'; // Import the Image model
 
 export const defineImageAnnotationModel = (sequelize: Sequelize) => {
   const ImageAnnotation = sequelize.define('image_annotations', {
@@ -8,22 +7,30 @@ export const defineImageAnnotationModel = (sequelize: Sequelize) => {
       autoIncrement: true,
       primaryKey: true,
     },
-    image_id: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false,
-    },
     coordinates: {
       type: DataTypes.GEOMETRY('POINT'),
       allowNull: false,
     },
-    notes: {
+    shape: {
+      type: DataTypes.ENUM("point", "star", "circle", "rectangle"),
+      allowNull: false,
+    },
+    size: {
       type: DataTypes.INTEGER,
+      defaultValue: 1,
+    },
+    color: {
+      type: DataTypes.STRING,
+      defaultValue: "#000000",
+    },
+    notes: {
+      type: DataTypes.STRING,
       defaultValue: null,
     },
   });
 
   // Define associations
-  ImageAnnotation.belongsTo(defineImageModel(sequelize), { foreignKey: 'image_id' });
+  // ImageAnnotation.belongsTo(defineImageModel(sequelize), { foreignKey: 'image_id', constraints: false});
 
   return ImageAnnotation;
 };

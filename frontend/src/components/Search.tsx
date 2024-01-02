@@ -16,7 +16,7 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
   };
 
   return (
-    <div className="p-4 bg-gray-200">
+    <div className="p-4 bg-gray-200 justify-center flex">
       <input
         type="text"
         placeholder="Search..."

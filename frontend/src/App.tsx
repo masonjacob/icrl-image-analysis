@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Search from "./components/Search";
 import List from "./components/List";
 import ImageUpload from "./components/ImageUpload";
+import NavigationBar from "./components/NavagationBar";
+import Login from "./components/Login";
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -48,10 +50,9 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-semibold mb-4 text-center">
-        URI ICRL Image Analysis & Annotation
-      </h1>
+    <div /*className="container mx-auto p-4"*/>
+      <Login/>
+      {/* <NavigationBar/>
       <div className="content-start">
         <Search onSearch={handleSearch} />
         <List results={searchResults} />
@@ -65,7 +66,7 @@ const App: React.FC = () => {
           </div>
         )}
         <ImageUpload onImageUpload={handleImageUpload} />
-      </div>
+      </div> */}
     </div>
   );
 };
